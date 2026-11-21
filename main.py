@@ -41,9 +41,9 @@ def stamp_circle(d, cx, cy, r, lines, color=RED, size=15):
 def portrait(d, box):
     x0, y0, x1, y1 = box
     d.rectangle(box, fill=PALE_BLUE, outline=NAVY, width=2)
-    # faint guilloche arcs
+    # faint guilloche arcs, kept inside the photo box
     for i in range(6):
-        d.arc([x0 - 40 + i * 8, y0 - 20 + i * 6, x1 + 40 - i * 8, y1 + 20 - i * 6],
+        d.arc([x0 + 4 + i * 6, y0 + 4 + i * 5, x1 - 4 - i * 6, y1 - 4 - i * 5],
               start=200, end=340, fill=(170, 190, 200), width=1)
     # shoulders + head silhouette
     d.ellipse([x0 + 52, y0 + 42, x0 + 128, y0 + 138], fill=(58, 90, 110))
@@ -100,8 +100,8 @@ def main():
     y = field(d, 44, y, "AUTHORITY", "Port Meridian Passport Office")
     y = field(d, 44, y, "SEX", "F")
 
-    # issue stamp overlapping the photo corner
-    stamp_circle(d, 208, 318, 46, ["ISSUED", "PORT MERIDIAN", "02 FEB 2026"],
+    # issue stamp in the empty space below the photo
+    stamp_circle(d, 134, 402, 44, ["ISSUED", "PORT MERIDIAN", "02 FEB 2026"],
                  size=12)
 
     # machine readable zone
@@ -133,8 +133,8 @@ def main():
 
     # departure tax stamp
     d.rectangle([556, 600, 996, 660], outline=RED, width=3)
-    bf = font("DejaVuSans-Bold.ttf", 22)
-    d.text((576, 618), "DEPARTURE TAX PAID \u2014 40 KORUN", fill=RED, font=bf)
+    bf = font("DejaVuSans-Bold.ttf", 18)
+    d.text((576, 620), "DEPARTURE TAX PAID \u2014 40 KORUN", fill=RED, font=bf)
 
     # telling detail: the visa condition box
     d.rectangle([556, 690, 996, 830], outline=NAVY, width=2)
